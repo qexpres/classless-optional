@@ -1,6 +1,6 @@
 {
   "name": "@qexpres/classless-optional",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Another optional library for Typescript as JavaScript, but this time based on Douglas Crockford's \"Classless\" ideas.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
