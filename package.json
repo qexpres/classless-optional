@@ -1,0 +1,49 @@
+{
+  "name": "@qexpres/classless-optional",
+  "version": "1.0.3",
+  "description": "Another optional library for Typescript as JavaScript, but this time based on Douglas Crockford's \"Classless\" ideas.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qexpres/classless-optional"
+  },
+  "author": "Jasper Boot",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^10.12.2",
+    "jest": "^24.5.0",
+    "prettier": "^1.13.7",
+    "source-map-support": "^0.5.6",
+    "ts-jest": "^24.0.0",
+    "ts-node": "^3.3.0",
+    "tsconfig-paths": "^3.4.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "typescript": "^3.1.6"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
