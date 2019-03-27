@@ -34,6 +34,8 @@ export interface Optional<T> {
 
   map<U>(f: (value: T) => U | nil): Optional<U>;
 
+  or(value: () => Optional<T>): Optional<T>;
+
   orElse(value: T): T;
 
   orElseGet(value: () => T): T;

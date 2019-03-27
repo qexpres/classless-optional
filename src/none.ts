@@ -34,6 +34,10 @@ export function None<T>(): Optional<T> {
     return None();
   }
 
+  function or(f: () => Optional<T>): Optional<T> {
+    return f();
+  }
+
   function orElse(other: T): T {
     return other;
   }
@@ -67,6 +71,7 @@ export function None<T>(): Optional<T> {
     isDefined,
     isEmpty,
     map,
+    or,
     orElse,
     orElseGet,
     orNull,

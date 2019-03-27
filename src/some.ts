@@ -35,6 +35,10 @@ export function Some<T>(value: T): Optional<T> {
     return Optional.of(f(value));
   }
 
+  function or(): Optional<T> {
+    return Optional.of(value);
+  }
+
   function orElse(): T {
     return value;
   }
@@ -68,6 +72,7 @@ export function Some<T>(value: T): Optional<T> {
     isDefined,
     isEmpty,
     map,
+    or,
     orElse,
     orElseGet,
     orNull,
