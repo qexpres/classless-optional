@@ -5,19 +5,22 @@ import { Some } from './some';
 const NONE = None<any>();
 
 export const Optional = Object.freeze({
-  flatten: <T>(array: Array<Optional<T>>): T[] => {
+  first<T>(array: Array<Optional<T>>): Optional<T> {
+    return Optional.of(array.find(_ => _.isDefined())).flatMap(_ => _);
+  },
+  flatten<T>(array: Array<Optional<T>>): T[] {
     return array.reduce<T[]>((values, current) => values.concat(current.toArray()), []);
   },
-  none: <T>(): Optional<T> => {
+  none<T>(): Optional<T> {
     return NONE;
   },
-  of: <T>(value: T | nil): Optional<T> => {
+  of<T>(value: T | nil): Optional<T> {
     return value !== null && typeof value !== 'undefined' ? Some(value) : NONE;
   },
-  ofTruthy: <T>(value: T | nil): Optional<T> => {
+  ofTruthy<T>(value: T | nil): Optional<T> {
     return value ? Some(value) : NONE;
   },
-  some: <T extends {}>(value: T): Optional<T> => {
+  some<T extends {}>(value: T): Optional<T> {
     return Some(value);
   },
 });
