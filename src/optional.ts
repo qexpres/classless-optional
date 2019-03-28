@@ -2,22 +2,29 @@ import { nil } from './nil';
 import { None } from './none';
 import { Some } from './some';
 
+const NONE = None<any>();
+
 export const Optional = Object.freeze({
-  empty: <T>(): Optional<T> => {
-    return None();
-  },
   flatten: <T>(array: Array<Optional<T>>): T[] => {
-    return array.reduce((somes, current) => [...somes, ...current.toArray()], []);
+    return array.reduce<T[]>((values, current) => values.concat(current.toArray()), []);
+  },
+  none: <T>(): Optional<T> => {
+    return NONE;
   },
   of: <T>(value: T | nil): Optional<T> => {
-    return value !== null && typeof value !== 'undefined' ? Some(value) : None();
+    return value !== null && typeof value !== 'undefined' ? Some(value) : NONE;
   },
   ofTruthy: <T>(value: T | nil): Optional<T> => {
-    return value ? Some(value) : None();
+    return value ? Some(value) : NONE;
+  },
+  some: <T extends {}>(value: T): Optional<T> => {
+    return Some(value);
   },
 });
 
 export interface Optional<T> {
+  equals<S>(other: Optional<S>): boolean;
+
   exists(f: (value: T) => boolean): boolean;
 
   filter(f: (value: T) => boolean): Optional<T>;
@@ -42,9 +49,11 @@ export interface Optional<T> {
 
   orNull(): T | null;
 
-  orThrow<E extends Error>(e: E): T;
+  orThrow<E extends Error>(e: () => E): T;
 
   orUndefined(): T | undefined;
 
   toArray(): T[];
+
+  toString(): string;
 }

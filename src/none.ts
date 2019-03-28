@@ -2,16 +2,20 @@ import { NoSuchElementException } from './no-such-element-exception';
 import { Optional } from './optional';
 
 export function None<T>(): Optional<T> {
+  function equals<S>(other: Optional<S>): boolean {
+    return other.isEmpty();
+  }
+
   function exists(): false {
     return false;
   }
 
   function filter(): Optional<T> {
-    return None();
+    return Optional.none();
   }
 
   function flatMap<U>(): Optional<U> {
-    return None();
+    return Optional.none();
   }
 
   function forEach(): void {
@@ -31,7 +35,7 @@ export function None<T>(): Optional<T> {
   }
 
   function map<U>(): Optional<U> {
-    return None();
+    return Optional.none();
   }
 
   function or(f: () => Optional<T>): Optional<T> {
@@ -50,8 +54,8 @@ export function None<T>(): Optional<T> {
     return null;
   }
 
-  function orThrow<E extends Error>(e: E): never {
-    throw e;
+  function orThrow<E extends Error>(e: () => E): never {
+    throw e();
   }
 
   function orUndefined(): undefined {
@@ -62,7 +66,12 @@ export function None<T>(): Optional<T> {
     return [];
   }
 
+  function toString(): string {
+    return 'None()';
+  }
+
   return Object.freeze({
+    equals,
     exists,
     filter,
     flatMap,
@@ -78,5 +87,6 @@ export function None<T>(): Optional<T> {
     orThrow,
     orUndefined,
     toArray,
+    toString,
   });
 }

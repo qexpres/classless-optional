@@ -1,14 +1,17 @@
 import { nil } from './nil';
-import { None } from './none';
 import { Optional } from './optional';
 
 export function Some<T>(value: T): Optional<T> {
+  function equals<S>(other: Optional<S & T>): boolean {
+    return other.isDefined() && other.get() === value;
+  }
+
   function exists(f: (value: T) => boolean): boolean {
     return f(value);
   }
 
   function filter(f: (value: T) => boolean): Optional<T> {
-    return exists(f) ? Some(value) : None();
+    return exists(f) ? Optional.some(value) : Optional.none();
   }
 
   function flatMap<S>(f: (value: T) => Optional<S>): Optional<S> {
@@ -63,7 +66,12 @@ export function Some<T>(value: T): Optional<T> {
     return [value];
   }
 
+  function toString(): string {
+    return `Some(${value.toString()})`;
+  }
+
   return Object.freeze({
+    equals,
     exists,
     filter,
     flatMap,
@@ -79,5 +87,6 @@ export function Some<T>(value: T): Optional<T> {
     orThrow,
     orUndefined,
     toArray,
+    toString,
   });
 }

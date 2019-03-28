@@ -1,16 +1,16 @@
 import { NoSuchElementException } from './no-such-element-exception';
-import { None } from './none';
+import { Optional } from './optional';
 
 describe('A None', () => {
   it('should return false for exists()', () => {
     const callback = jest.fn();
-    expect(None().exists(callback)).toBe(false);
+    expect(Optional.none().exists(callback)).toBe(false);
     expect(callback).toHaveBeenCalledTimes(0);
   });
   it('should return None for filter()', () => {
     const callback = jest.fn();
     expect(
-      None()
+      Optional.none()
         .filter(callback)
         .isEmpty(),
     ).toBe(true);
@@ -19,7 +19,7 @@ describe('A None', () => {
   it('should return None for flatMap()', () => {
     const callback = jest.fn();
     expect(
-      None()
+      Optional.none()
         .flatMap(callback)
         .isEmpty(),
     ).toBe(true);
@@ -27,42 +27,42 @@ describe('A None', () => {
   });
   it('should never use the forEach() callback', () => {
     const callback = jest.fn();
-    None().forEach(callback);
+    Optional.none().forEach(callback);
     expect(callback).toHaveBeenCalledTimes(0);
   });
   it('should throw an Error for get()', () => {
-    expect(() => None().get()).toThrow(NoSuchElementException);
+    expect(() => Optional.none().get()).toThrow(NoSuchElementException);
   });
   it('should return the alternative value for orElse()', () => {
     const a = {};
-    expect(None().orElse(a)).toBe(a);
+    expect(Optional.none().orElse(a)).toBe(a);
   });
   it('should return the alternative optional for orElse()', () => {
-    const a = None();
-    expect(None().orElse(a)).toBe(a);
+    const a = Optional.none();
+    expect(Optional.none().orElse(a)).toBe(a);
   });
   it('should return null for orNull()', () => {
-    expect(None().orNull()).toBeNull();
+    expect(Optional.none().orNull()).toBeNull();
   });
   it('should return undefined for orUndefined()', () => {
-    expect(None().orUndefined()).toBeUndefined();
+    expect(Optional.none().orUndefined()).toBeUndefined();
   });
   it('should return false for isDefined()', () => {
-    expect(None().isDefined()).toBe(false);
+    expect(Optional.none().isDefined()).toBe(false);
   });
   it('should return true for isEmpty()', () => {
-    expect(None().isEmpty()).toBe(true);
+    expect(Optional.none().isEmpty()).toBe(true);
   });
   it('should return None for map()', () => {
     const callback = jest.fn();
     expect(
-      None()
+      Optional.none()
         .map(callback)
         .isEmpty(),
     ).toBe(true);
     expect(callback).toHaveBeenCalledTimes(0);
   });
   it('should return an empty array for toArray()', () => {
-    expect(None().toArray()).toEqual([]);
+    expect(Optional.none().toArray()).toEqual([]);
   });
 });

@@ -1,6 +1,4 @@
-import { None } from './None';
 import { Optional } from './optional';
-import { Some } from './Some';
 
 describe('Optional.ofTruthy', () => {
   it('should wrap any truthy value in Some', () => {
@@ -38,14 +36,14 @@ describe('Optional.flatten', () => {
   it('should return the array with the values of all Somes', () => {
     expect(
       Optional.flatten([
-        Some(1),
-        Some(2),
-        None(),
-        None(),
-        Some(4),
+        Optional.some(1),
+        Optional.some(2),
+        Optional.none(),
+        Optional.none(),
+        Optional.some(4),
         Optional.of(null),
         Optional.of(undefined),
-        Some('kaas'),
+        Optional.some('kaas'),
       ]),
     ).toEqual([1, 2, 4, 'kaas']);
   });
