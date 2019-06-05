@@ -67,7 +67,7 @@ export function Some<T>(value: T): Optional<T> {
   }
 
   function toString(): string {
-    return `Some(${value.toString()})`;
+    return `Some(${value})`;
   }
 
   return Object.freeze({
